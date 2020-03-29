@@ -1,8 +1,10 @@
 # TextWar-PHP-Client
 A client by PHP.
-## PHP Version
+### PHP Version
  - 7.0+
-## PHP Extensions
+### PHP Extensions
  - pthreads
  - sockets
  - json
+### Run
+ > php init.php
