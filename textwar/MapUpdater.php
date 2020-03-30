@@ -19,10 +19,16 @@ class MapUpdater extends \Thread
       $log = new Logger("[TextWar]");
       $retry = 3;
       while(($r=$sock->read())!==null) {
-        $log->info("Received: ".$r);
+        $log->info("Received: \n".$r);
         $pack = isset($pack) ? $pack->append($r) : new Package($r);
         if(($p=$pack->parse()) == Package::ERR_NO_ERROR) {
           $log->notice("Parse Completed");
+          $log->notice("Time-Stamp: ".$pack->getTimestamp());
+          ob_start();
+          print_r($pack->getData());
+          $data = ob_get_contents();
+          ob_end_clean();
+          $log->notice("Data:\n".$data);
           unset($pack);
           $retry = 3;
         }else{
