@@ -20,4 +20,5 @@ $c->write($code);
 while(($get=trim(fgets(STDIN)))!="exit") {
   $c->write($get);
 }
+$c->safeClose();
 $updater->join();
