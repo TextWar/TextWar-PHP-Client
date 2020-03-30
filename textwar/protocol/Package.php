@@ -49,9 +49,10 @@ class Package
       
     return self::ERR_NO_ERROR;
   }
-  public function append(string $prot_data):void
+  public function append(string $prot_data):Package
   {
     $this->prot_data .= $prot_data;
+    return $this;
   }
   protected function parseHead(array $lines):bool
   {
