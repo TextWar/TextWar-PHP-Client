@@ -82,7 +82,12 @@ class BaseBoard
   public function refreshAll()
   {
     $this->cursorBegin();
+    $this->clearScreen();
     $this->printAll();
+  }
+  public function clearScreen()
+  {
+    echo "\033[2J";
   }
   public function clearAll($change_data = false)
   {
