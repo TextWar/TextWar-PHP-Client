@@ -11,14 +11,13 @@ class Rectangle extends Element
     $this->height = abs($y1-$y2);
     $this->width = abs($x1-$x2);
     $this->char = $char;
-    $this->initBoardData();
+    $this->print();
   }
   public function print()
   {
     for($y=0;$y<$this->height;$y++) {
       for($x=0;$x<$this->width;$x++) {
-        $loc = $this->getLocate($x,$y);
-        $this->board->put($loc[0],$loc[1],$this->char);
+        $this->set($x,$y,$this->board->getBorderChar());
       }
     }
   }

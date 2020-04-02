@@ -33,7 +33,7 @@ class Label extends Element
     $length = count($c);
     ob_start();
     for($y=0;$y<$this->height;$y++) {
-      $loc = $this->getLocate(0,$y);
+      $loc = $this->getLocation(0,$y);
       $this->board->cursorLocate($loc[0],$loc[1]);
       for($x=0;$x<$this->width;$x++) {    
         //解决中文换行乱码
@@ -62,7 +62,7 @@ class Label extends Element
     $i=0;
     ob_start();
     for($y=0;$y<$this->height;$y++) {
-      $loc = $this->getLocate(0,$y);
+      $loc = $this->getLocation(0,$y);
       $this->board->cursorLocate($loc[0],$loc[1]);
       for($x=0;$x<$this->width;$x++) {    
         echo $fill;

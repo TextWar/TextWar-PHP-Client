@@ -15,29 +15,28 @@ abstract class Element
   
   abstract public function print();
   
-  public function getLocate(int $x,int $y)
+  public function getLocation(int $x,int $y)
   {
     $x += $this->origin[0];
     $y += $this->origin[1];
     return [$x,$y];
   }
-  public function initBoardData(string $fill = null)
-  {
-    $fill = $fill ?? $this->board->getBorderChar();
-    for($y=0;$y<$this->height;$y++) {
-      for($x=0;$x<$this->width;$x++) {
-        $loc = $this->getLocate($x,$y);
-        $this->board->set($loc[0],$loc[1],$fill);
-      }
-    }
-  }
   public function clear(string $fill = " ")
   {
     for($y=0;$y<$this->height;$y++) {
       for($x=0;$x<$this->width;$x++) {
-        $loc = $this->getLocate($x,$y);
+        $loc = $this->getLocation($x,$y);
         $this->board->put($loc[0],$loc[1],$fill);
       }
     }
+  }
+  public function set(int $x,int $y,string $char)
+  {
+    $loc = $this->getLocation($x,$y);
+    $this->board->isActived()
+    ?
+    $this->board->put($loc[0],$loc[1],$char)
+    :
+    $this->board->set($loc[0],$loc[1],$char);
   }
 }

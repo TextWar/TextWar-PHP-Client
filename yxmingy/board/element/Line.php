@@ -9,13 +9,12 @@ class Line extends Element
     array_push($this->origin,0,$y);
     $this->height = 1;
     $this->width = $this->board->getWidth();
-    //var_dump($this->width);
-    $this->initBoardData();
+    $this->print();
   }
   public function print()
   {
     for($x=0;$x<$this->width;$x++) {
-      $this->board->put($x,$this->origin[1],$this->board->getBorderChar());
+      $this->set($x,0,$this->board->getBorderChar());
     }
   }
 }
