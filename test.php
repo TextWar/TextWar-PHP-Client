@@ -1,53 +1,36 @@
 <?php
-use textwar\Board;
-use textwar\protocol\Package;
-use textwar\protocol\Protocol;
-echo $code=Protocol::encode(
-  [
-  "hello"=>"world",
-  "im"=>"xMing"
-  ]
-);
-$pack = new Package($code);
-$ok = $pack->parse();
-if($ok == Package::ERR_NO_ERROR)
-{
-  var_dump($pack->getData());
-  var_dump($pack->getTimestamp());
-}else{
-  var_dump($ok);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-$b = new Board(30,25);
+require_once "autoload.php";
+require_once "yxmingy/crypt.php";
+$b = new \yxmingy\board\CustomBoard(25,25);
+$f = $b->addRectangle(5,5,15,15);
+$t = $b->addLabel(5,18,10,21);
+$t->setContent("起毒素吃死苏旭爱死神看书");
 echo PHP_EOL;
 sleep(2);
-/*
+//$l->print();
+$l = $b->addLine(17);
 $b->active();
+
 while(true)
 {
-  for($x=0;$x<25;$x++) {
-    for($y=0;$y<30;$y++) {
-      $b->put($x,$y,"*");
-    }
-  }
+  //打开缓冲区
+  ob_start();
+  //长方形显形
+  $f->print();
+  $l->print();
+  $t->print();
+  //刷新缓冲区
+  ob_end_flush();
   usleep(5e4);
-  for($x=0;$x<25;$x++) {
-    for($y=0;$y<30;$y++) {
-      $b->put($x,$y," ");
-    }
-  }
+  
+  ob_start();
+  //长方形隐藏
+  $f->clear();
+  $l->clear();
+  $t->clear();
+  ob_end_flush();
   usleep(5e4);
-  $b->refresh();
-}*/
+  
+  
+  $b->refreshAll();
+}

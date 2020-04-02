@@ -1,23 +1,24 @@
 <?php
-function autoload(string $class)
-{
-  $class = str_replace('\\', '/', $class);
-  $file_name = dirname(__FILE__).'/'.$class.'.php';
-  require_once $file_name;
-}
-spl_autoload_register("autoload");
+require_once "autoload.php";
 error_reporting(E_ALL);
 ini_set('display_errors', false);
 $log = new \yxmingy\Logger("[TextWar]");
 set_error_handler(function ($error_no, $error_str, $error_file, $error_line) use($log){
-    $log->error("In file ".$error_file." ".$error_str."at line ".$error_line);
+    $log->error("In file ".$error_file." ".$error_str." at line ".$error_line);
+    exit();
 }, E_ALL | E_STRICT);
 try {
-    require_once "main.php";
-} catch (\Exception $exception) {
-    var_export($exception);
+    require_once "test.php";
+} catch (\Exception $e) {
+    $log->error(
+      "In file ".$e->getFile()
+      ." ".$e->getMessage()
+      ." at line ".$e->getLine()
+      .PHP_EOL.
+      $e->getTraceAsString()
+    );
+    exit();
 } catch (\Error $error) {
-    // 就是这里了，try catch 捕捉了 Error
     $log->error(
       "In file ".$error->getFile()
       ." ".$error->getMessage()
@@ -25,4 +26,5 @@ try {
       .PHP_EOL.
       $error->getTraceAsString()
     );
+    exit();
 }

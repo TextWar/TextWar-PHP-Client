@@ -35,6 +35,6 @@ class Logger
   }
   public function error(string $msg)
   {
-    $this->print("-ERROR: ".$msg,self::RED,self::BLUE);
+    $this->print("-ERROR: ".$msg,self::WHITE,self::RED);
   }
 }

@@ -2,7 +2,7 @@
 use yxmingy\socket\ClientSocket;
 use textwar\MapUpdater;
 $c = new ClientSocket();
-$c->connect("47.240.119.233",2333);
+$c->connect("www.xming.fun",2333);
 //echo $c->getPeerAddr().PHP_EOL;
 use textwar\protocol\Package;
 use textwar\protocol\Protocol;

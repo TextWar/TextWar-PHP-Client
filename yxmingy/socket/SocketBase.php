@@ -36,7 +36,7 @@ abstract class SocketBase
         $this->protocol = getprotobyname("icmp");
         break;
       default:
-        exit("[Socket] Protocol type not exists!");
+        throw new Exception("[Socket] Protocol type not exists!");
     }
     if($socket != null) {
       $this->socket = $socket;
@@ -77,8 +77,7 @@ abstract class SocketBase
   public function rebind(string $address = '0',int $port = 0):SocketBase
   {
     if (!socket_set_option($this->getSocketResource(),SOL_SOCKET, SO_REUSEADDR, 1)) {
-      echo socket_strerror(socket_last_error($this->getSocketResource()));
-      exit;
+      throw new Exception (socket_strerror(socket_last_error($this->getSocketResource())));
     }
     return $this->bind($address,$port);
   }
@@ -99,9 +98,9 @@ abstract class SocketBase
   {
     $data = $this->_read($length);
     if($data == "") {
-      if($data === "")
+      if($data === "") //disconnected
         return null;
-      return "";
+      return "";//no data
     }
     return $data;
   }
