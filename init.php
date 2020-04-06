@@ -8,7 +8,7 @@ set_error_handler(function ($error_no, $error_str, $error_file, $error_line) use
     exit();
 }, E_ALL | E_STRICT);
 try {
-    require_once "test.php";
+    require_once "main.php";
 } catch (\Exception $e) {
     $log->error(
       "In file ".$e->getFile()
